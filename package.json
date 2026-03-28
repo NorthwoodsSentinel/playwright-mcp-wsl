@@ -1,0 +1,47 @@
+{
+  "name": "playwright-mcp-wsl",
+  "version": "1.0.0",
+  "description": "Drop-in WSL-safe wrapper for @playwright/mcp. Prevents GPU crashes on Windows Subsystem for Linux by disabling Chromium GPU acceleration through the dxg bridge.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NorthwoodsSentinel/playwright-mcp-wsl.git"
+  },
+  "keywords": [
+    "playwright",
+    "mcp",
+    "wsl",
+    "wsl2",
+    "claude-code",
+    "browser-automation",
+    "windows",
+    "gpu-fix"
+  ],
+  "author": "Robert Chuvala <rob@northwoodssentinel.com>",
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">=18"
+  },
+  "bin": {
+    "playwright-mcp-wsl": "cli.js"
+  },
+  "main": "index.js",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "types": "./index.d.ts",
+      "default": "./index.js"
+    }
+  },
+  "dependencies": {
+    "@playwright/mcp": ">=0.0.60"
+  },
+  "files": [
+    "cli.js",
+    "index.js",
+    "index.d.ts",
+    "wsl-config.json",
+    "detect.js",
+    "README.md",
+    "LICENSE"
+  ]
+}

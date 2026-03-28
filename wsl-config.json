@@ -1,0 +1,11 @@
+{
+  "browser": {
+    "launchOptions": {
+      "args": [
+        "--disable-gpu",
+        "--disable-software-rasterizer",
+        "--disable-dev-shm-usage"
+      ]
+    }
+  }
+}
