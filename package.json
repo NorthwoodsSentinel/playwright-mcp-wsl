@@ -21,6 +21,14 @@
   "engines": {
     "node": ">=18"
   },
+  "scripts": {
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "lint": "eslint . --max-warnings 0",
+    "typecheck": "tsc -p tsconfig.json && tsc -p tsconfig.index.json",
+    "test": "vitest run --coverage && node scripts/verify-gate-scope.mjs",
+    "local:gate": "bun run format:check && bun run lint && bun run typecheck && bun run test"
+  },
   "bin": {
     "playwright-mcp-wsl": "cli.js"
   },
@@ -43,5 +51,15 @@
     "detect.js",
     "README.md",
     "LICENSE"
-  ]
+  ],
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^26.6.6",
+    "@vitest/coverage-v8": "^5.1.0",
+    "eslint": "^10.15.0",
+    "globals": "^17.14.0",
+    "prettier": "^3.10.1",
+    "typescript": "^5.5.0",
+    "vitest": "^5.1.0"
+  }
 }

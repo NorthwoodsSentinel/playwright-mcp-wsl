@@ -49,10 +49,16 @@ if (wsl) {
 
       // Clean up on exit
       process.on('exit', () => {
-        try { fs.unlinkSync(tmpConfig); } catch {}
+        try {
+          fs.unlinkSync(tmpConfig);
+        } catch {
+          // Already removed (or never written): nothing left to clean up.
+        }
       });
     } catch (e) {
-      process.stderr.write(`[playwright-mcp-wsl] Warning: could not merge with existing config: ${e.message}\n`);
+      process.stderr.write(
+        `[playwright-mcp-wsl] Warning: could not merge with existing config: ${/** @type {Error} */ (e).message}\n`,
+      );
       process.stderr.write(`[playwright-mcp-wsl] Falling back to WSL config only.\n`);
       process.env.PLAYWRIGHT_MCP_CONFIG = path.join(__dirname, 'wsl-config.json');
     }
@@ -66,9 +72,7 @@ const { program } = require('playwright-core/lib/utilsBundle');
 const { decorateMCPCommand } = require('playwright/lib/mcp/program');
 const packageJSON = require('@playwright/mcp/package.json');
 
-const p = program
-  .version('Version ' + packageJSON.version + ' (wsl-safe)')
-  .name('Playwright MCP (WSL-Safe)');
+const p = program.version('Version ' + packageJSON.version + ' (wsl-safe)').name('Playwright MCP (WSL-Safe)');
 
 decorateMCPCommand(p, packageJSON.version);
 void program.parseAsync(process.argv);
